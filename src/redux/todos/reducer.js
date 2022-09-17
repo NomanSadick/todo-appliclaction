@@ -9,7 +9,7 @@ const nextTodoId = (todos) => {
 
 const reducer =  (state = initialState, action) => {
     switch (action.type) {
-        case TOGGLED:
+        case ADDED:
             return [
                 ...state,
                 {
@@ -29,31 +29,32 @@ const reducer =  (state = initialState, action) => {
                 }
             })
 
-            case COLORSELECTED:
-                const {todoID, color} = action.payload;
-                return state.map(todo => {
-                    if(todo.id !== todoID) {
-                        return todo;
-                    }
-                    return {
-                        ...todo,
-                        color: color
-                    }
-                })
 
-                case DELETED:
-                    return state.filter(todo => todo.id !== action.payload);
+        case COLORSELECTED:
+            const { todoId, color } = action.payload;
+            return state.map((todo) => {
+                if (todo.id !== todoId) {
+                    return todo;
+                }
+                return {
+                    ...todo,
+                    color: color,
+                };
+            });
 
-                case ALLCOMPLETED:
-                    return state.map(todo => {
-                        return {
-                            ...todo,
-                            completed: true
-                        }
-                    })
+        case DELETED:
+            return state.filter(todo => todo.id !== action.payload);
 
-                case CLEARCOMPLETED:
-                    return state.filter(todo => !todo.completed);
+        case ALLCOMPLETED:
+            return state.map(todo => {
+                return {
+                    ...todo,
+                    completed: true
+                }
+            })
+
+        case CLEARCOMPLETED:
+            return state.filter(todo => !todo.completed);
                          
         default:
             return state;

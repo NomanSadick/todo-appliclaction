@@ -36,7 +36,7 @@ const handleColorChange = (todoId, color) => {
         </svg>}
       </div>
 
-      <div className="select-none flex-1 line-through">{text}</div>
+      <div className={`select-none flex-1 ${completed && "line-through"}`}>{text}</div>
 
       <div className={`flex-shrink-0 h-4 w-4 rounded-full border-2 ml-auto cursor-pointer border-green-500 hover:bg-green-500 ${color === "green" && "bg-green-500"}`}
       onClick ={() => handleColorChange(id, "green")}
